@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: todo-api
+  
+  # データベース接続設定
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://127.0.0.1:3306/todoapp?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Tokyo&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_unicode_ci&autoReconnect=true&allowLoadLocalInfile=false}
+    username: ${SPRING_DATASOURCE_USERNAME:todouser}
+    password: ${SPRING_DATASOURCE_PASSWORD:todopassword}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  # JPA設定
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        connection:
+          characterEncoding: utf8mb4
+          useUnicode: true
+    defer-datasource-initialization: true
+  
+  # SQL初期化設定
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+
+# サーバー設定
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# ログ設定
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.taskapp.todoapi: DEBUG
+
+# CORS設定（フロントエンド連携用）
+cors:
+  allowed-origins: http://localhost:3000 
